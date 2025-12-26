@@ -146,7 +146,8 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("cart", JSON.stringify(cart));
 
       // Redirect to payment page
-      window.location.href = "payment.htm";
+      window.location.href = "payment.html";
     });
   }
 });
+
