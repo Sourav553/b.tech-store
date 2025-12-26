@@ -1,0 +1,125 @@
+:root{
+  --bg:#f7f8fa;
+  --card:#ffffff;
+  --text:#1f2937;
+  --muted:#6b7280;
+  --brand:#0ea5e9; /* cyan-ish blue */
+  --brand-dark:#0284c7;
+  --ok:#16a34a;
+  --ok-dark:#15803d;
+  --danger:#ef4444;
+  --danger-dark:#dc2626;
+  --shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  color:var(--text);
+  background: url("https://www.toptal.com/designers/subtlepatterns/patterns/dot-grid.png");
+  background-size: repeat;
+}
+
+/* Nav */
+.nav{
+  position:sticky; top:0; z-index:20;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 20px;
+  background:linear-gradient(90deg, var(--brand), var(--brand-dark));
+  color:#fff;
+  box-shadow:var(--shadow);
+}
+.brand{font-weight:800; font-size:20px}
+.nav-links{list-style:none; display:flex; gap:18px; margin:0; padding:0}
+.nav-links a{color:#fff; text-decoration:none; font-weight:600; opacity:.95}
+.nav-links a:hover{opacity:1; text-decoration:underline}
+
+/* Sections */
+.home{padding:28px 16px; max-width:1100px; margin:0 auto}
+.hero{text-align:center}
+.hero-img {
+  width: 100%;
+  height: auto;
+  max-height: 550px;   /* 👈 yaha height control kar sakte ho */
+  object-fit: cover;   /* image ko crop karke fit karega */
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+.card{
+  background:var(--card); border-radius:14px; padding:18px; margin:16px 0; box-shadow:var(--shadow);
+}
+.card h2{margin-top:0}
+.contact-form form{display:grid; gap:10px}
+.contact-form input, .contact-form textarea{
+  padding:12px; border:1px solid #e5e7eb; border-radius:10px; font:inherit;
+}
+.btn{
+  border:none; border-radius:10px; padding:10px 14px; font-weight:700; cursor:pointer;
+}
+.btn.primary{background:var(--brand); color:#fff}
+.btn.primary:hover{background:var(--brand-dark)}
+.btn.ok{background:var(--ok); color:#fff}
+.btn.ok:hover{background:var(--ok-dark)}
+.btn.danger{background:var(--danger); color:#fff}
+.btn.danger:hover{background:var(--danger-dark)}
+
+/* Products */
+.products{max-width:1200px; margin:6px auto 28px; padding:0 16px}
+.products-header{text-align:center; margin:18px 0}
+.grid{
+  display:grid; gap:18px;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+}
+.product{
+  background:var(--card); border-radius:14px; overflow:hidden; box-shadow:var(--shadow);
+  display:flex; flex-direction:column; transition:transform .15s ease;
+}
+.product:hover{transform:translateY(-4px)}
+.product img{width:100%; aspect-ratio:1/1; object-fit:cover}
+.product .wrap{padding:12px; display:flex; flex-direction:column; gap:6px}
+.product h3{margin:0; font-size:16px}
+.price{font-weight:800}
+.muted{color:var(--muted); font-size:13px}
+.qty{
+  display:flex; align-items:center; gap:10px; justify-content:center; margin:8px 0;
+}
+.qty button{
+  border:none; background:#e5e7eb; padding:6px 10px; border-radius:8px; cursor:pointer;
+}
+.add{margin-top:auto}
+
+/* Cart */
+.cart{max-width:1100px; margin:28px auto; padding:18px}
+#cart-container{display:flex; flex-direction:column; gap:10px; margin-top:6px}
+.cart-item{
+  display:grid; grid-template-columns:60px 1fr auto; gap:12px; align-items:center;
+  background:#f9fafb; border-radius:12px; padding:10px;
+}
+.cart-item img{width:60px; height:60px; object-fit:cover; border-radius:8px}
+.cart-actions{display:flex; align-items:center; gap:8px}
+.cart-footer{
+  margin-top:12px; display:flex; align-items:center; justify-content:space-between;
+}
+
+/* Responsive tweaks */
+@media (max-width:520px){
+  .nav-links{gap:12px}
+  .cart-item{grid-template-columns:50px 1fr; grid-template-areas:
+    "img title"
+    "img actions";}
+}
+
+#purchaseBtn {
+  background: #2563eb;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  width: 40%;  /* jitna chhota chahiye utna % de do */
+  margin-top: 10px;
+}

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delivery & Payment - B.Tech Store</title>
+<style>
+body {
+  font-family: system-ui, sans-serif;
+  background: #f3f4f6;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+.payment-card {
+  width: 100%;
+  max-width: 520px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 28px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+.payment-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.payment-card input, .payment-card textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+}
+.payment-card textarea { height: 90px; resize: none; }
+.payment-section h3 { margin: 10px 0; }
+.radio-row { display: flex; justify-content: space-between; padding: 10px; margin-bottom: 6px; border-radius: 8px; border: 1px solid #e5e7eb; }
+.confirm-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #16a34a;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.cart-summary { margin-bottom: 15px; }
+.cart-summary div { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #e5e7eb; }
+</style>
+</head>
+<body>
+
+<div class="payment-card">
+  <h2>Delivery Details & Payment</h2>
+
+  <div class="cart-summary" id="cart-summary"></div>
+
+  <form id="payment-form">
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="text" id="phone" placeholder="Phone Number" required>
+    <textarea id="address" placeholder="Delivery Address" required></textarea>
+
+    <div class="payment-section">
+      <h3>Payment Method</h3>
+      <div class="radio-row">
+        <label>Cash on Delivery</label>
+        <input type="radio" name="payment" value="COD" checked>
+      </div>
+      <div class="radio-row">
+        <label>Online Payment (UPI)</label>
+        <input type="radio" name="payment" value="UPI">
+      </div>
+    </div>
+
+    <button type="submit" class="confirm-btn">Confirm Order</button>
+  </form>
+</div>
+
+<script>
+// Load cart
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+const summary = document.getElementById("cart-summary");
+
+if (cart.length === 0) {
+  summary.innerHTML = "<p>Your cart is empty!</p>";
+} else {
+  let total = 0;
+  cart.forEach((item, i) => {
+    let row = document.createElement("div");
+    row.innerHTML = `${item.name} x ${item.qty} <span>₹${item.price * item.qty}</span>`;
+    summary.appendChild(row);
+    total += item.price * item.qty;
+  });
+  let totalRow = document.createElement("div");
+  totalRow.style.fontWeight = "bold";
+  totalRow.innerHTML = `Total <span>₹${total}</span>`;
+  summary.appendChild(totalRow);
+}
+
+// Handle form submission
+document.getElementById("payment-form").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  let name = document.getElementById("name").value.trim();
+  let phone = document.getElementById("phone").value.trim();
+  let address = document.getElementById("address").value.trim();
+  let payment = document.querySelector('input[name="payment"]:checked').value;
+
+  if (!name || !phone || !address) return alert("Please fill all details.");
+
+  // Build WhatsApp message
+  let message = "🛒 *New Order - B.Tech Store*%0A%0A";
+  message += "*Customer Details*%0A";
+  message += `👤 Name: ${name}%0A📞 Phone: ${phone}%0A🏠 Address: ${address}%0A%0A`;
+  message += "*Order Items*%0A";
+
+  let total = 0;
+  cart.forEach((item, i) => {
+    message += `${i+1}. ${item.name} | Qty: ${item.qty} | ₹${item.price * item.qty}%0A`;
+    total += item.price * item.qty;
+  });
+
+  message += `%0A💰 Total: ₹${total}`;
+  message += `%0A💳 Payment: ${payment === "COD" ? "Cash on Delivery" : "Online Payment (UPI)"}`;
+
+  // WhatsApp number
+  let adminNumber = "917501136492";
+
+  // Open WhatsApp
+  window.open(`https://wa.me/${adminNumber}?text=${message}`, "_blank");
+
+  // Clear cart
+  localStorage.removeItem("cart");
+  alert("Order confirmed! WhatsApp is opening...");
+});
+</script>
+
+</body>
+</html>

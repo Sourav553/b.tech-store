@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>B.TECH - STORE • T-Shirts Store</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="nav">
+    <div class="brand">B.TECH - STORE</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#cart">Cart 🛒 (<span id="cart-count">0</span>)</a></li>
+    </ul>
+  </nav>
+
+  <!-- Home -->
+  <section id="home" class="home">
+    <div class="hero">
+      <img class="hero-img" src="image/banner.jpg" alt="Banner"/>
+
+      <h1>Welcome to B.Tech Store</h1>
+      <p>Half Sleeve & Full Sleeve T-Shirts – Style, Comfort & Quality You Deserve.
+        Trendy designs, vibrant colours, and soft cotton fabrics – all at student-friendly prices
+      </p>
+    </div>
+
+    <div class="about card">
+      <h2>About Our Company</h2>
+      <p>
+        Why Choose B.Tech Store?<br>
+          B.Tech Store is built for youngsters who love comfort and style.
+We specialize in Half Sleeve and Full Sleeve T-Shirts, made from premium cotton blends for everyday wear.<br>
+Whether you want solid basics, trendy colours, or durable college wear – we’ve got you covered.
+      </p>
+    </div>
+
+    <div class="contact-info card">
+      <h2>Contact Information</h2>
+      <p><strong>Address:</strong> Fashion Street, Kolkata, India</p>
+      <p><strong>Phone:</strong> +91 740730148</p>
+      <p><strong>Email:</strong> support@myshop.com</p>
+    </div>
+
+    <div class="contact-form card">
+      <h2>Contact Us</h2>
+      <form id="contact-form" onsubmit="submitForm(event)">
+        <input type="text" id="name" placeholder="Your Name" required/>
+        <input type="email" id="email" placeholder="Your Email" required/>
+        <textarea id="message" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn primary">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="products" class="products">
+    <div class="products-header">
+      <h2>Our T-Shirts</h2>
+      <p>Half sleeve & Full sleeve — 50 colourful options.</p>
+    </div>
+    <!-- JS fills this grid -->
+    <div id="product-list" class="grid"></div>
+  </section>
+
+  <!-- Cart -->
+  <section id="cart" class="cart card">
+    <h2>Your Cart</h2>
+    <div id="cart-container"></div>
+    <div class="cart-footer">
+      <h3>Total: ₹<span id="cart-total">0</span></h3>
+      <button class="btn danger" onclick="clearCart()">Clear Cart</button>
+      <button id="purchaseBtn">Purchase</button>
+    </div>
+  </section>
+<script src="script.js"></script>
+
+</body>
+</html>
